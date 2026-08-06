@@ -2,9 +2,8 @@ const express = require('express');
 const serverless = require('serverless-http');
 
 const app = express();
-const router = express.Router();
 
-// Helper template wrapper to keep layout clean and consistent
+// Helper template wrapper for consistent styling across all pages
 const layout = (title, description, content) => `
 <!DOCTYPE html>
 <html lang="en">
@@ -13,23 +12,7 @@ const layout = (title, description, content) => `
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${title}</title>
     <meta name="description" content="${description}">
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f4f6f8; }
-        header { background: #1a202c; color: #fff; padding: 2rem 1rem; text-align: center; }
-        header h1 { margin: 0; font-size: 1.8rem; }
-        header p { color: #a0aec0; margin-top: 0.5rem; }
-        nav { background: #2d3748; padding: 0.75rem; text-align: center; }
-        nav a { color: #fff; margin: 0 15px; text-decoration: none; font-weight: 500; }
-        nav a:hover { text-decoration: underline; }
-        .container { max-width: 900px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        h2 { color: #2d3748; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
-        .cta-box { background: #ebf8ff; border-left: 4px solid #3182ce; padding: 1.5rem; margin: 2rem 0; border-radius: 4px; }
-        .cta-btn { display: inline-block; background: #3182ce; color: #fff; padding: 0.75rem 1.5rem; border-radius: 4px; text-decoration: none; font-weight: bold; margin-top: 10px; }
-        .cta-btn:hover { background: #2b6cb0; }
-        footer { text-align: center; padding: 2rem; font-size: 0.8rem; color: #718096; background: #edf2f7; margin-top: 3rem; }
-        ul { padding-left: 20px; }
-        li { margin-bottom: 10px; }
-    </style>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <header>
@@ -55,16 +38,16 @@ const layout = (title, description, content) => `
 `;
 
 // 1. Homepage
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
   const content = `
     <h2>Expert Private QuickBooks® Support for US Businesses</h2>
     <p>Are you stuck with broken reconciliations, missing bank feeds, or frustrating software error codes? We provide private, one-on-one remote troubleshooting and bookkeeping clean-up services tailored for US small business owners and accountants.</p>
     
     <h3>Why Choose Our Private Support?</h3>
     <ul>
-      <li><strong>Immediate Response:</strong> Skip the long corporate queues and get direct help.</li>
-      <li><div><strong>US-Tailored Solutions:</strong> Expertise matching American accounting workflows and tax schedules.</div></li>
-      <li><strong>No Robot Loops:</strong> Talk directly to an expert who resolves your issue fast via secure chat or screen share.</li>
+      <li><strong>Immediate Response:</strong> Skip long corporate queues and get direct help.</li>
+      <li><strong>US-Tailored Solutions:</strong> Expertise matching American accounting workflows and tax schedules.</li>
+      <li><strong>No Robot Loops:</strong> Talk directly to an expert who resolves your issue fast via secure chat.</li>
     </ul>
 
     <div class="cta-box">
@@ -77,7 +60,7 @@ router.get('/', (req, res) => {
 });
 
 // 2. Errors Hub Page
-router.get('/errors', (req, res) => {
+app.get('/errors', (req, res) => {
   const content = `
     <h2>QuickBooks® Error Troubleshooting Hub</h2>
     <p>Select your error category below to find step-by-step resolution guides or request private expert help:</p>
@@ -92,7 +75,7 @@ router.get('/errors', (req, res) => {
 });
 
 // 3. SEO Page 1: Company File Errors
-router.get('/errors/company-file-errors', (req, res) => {
+app.get('/errors/company-file-errors', (req, res) => {
   const content = `
     <h2>Fixing QuickBooks® Company File Errors (6000 Series, 6123, 6147)</h2>
     <p>Company file errors occur when your software is blocked from opening your database file due to permissions, network storage issues, or data damage. US businesses frequently encounter these when launching shared files.</p>
@@ -114,7 +97,7 @@ router.get('/errors/company-file-errors', (req, res) => {
 });
 
 // 4. SEO Page 2: Multi-User / Network Errors
-router.get('/errors/multi-user-errors', (req, res) => {
+app.get('/errors/multi-user-errors', (req, res) => {
   const content = `
     <h2>Resolving QuickBooks® Network & Multi-User Errors (H202, H505)</h2>
     <p>When multiple computers on your office network try to access your company file simultaneously, Error H201, H202, or H505 may lock you out because the workstation cannot reach the server database manager.</p>
@@ -136,7 +119,7 @@ router.get('/errors/multi-user-errors', (req, res) => {
 });
 
 // 5. SEO Page 3: Installation & Licensing Errors
-router.get('/errors/installation-errors', (req, res) => {
+app.get('/errors/installation-errors', (req, res) => {
   const content = `
     <h2>Fixing QuickBooks® Installation & License Errors (3371, 1603, 1904)</h2>
     <p>Installation blocks and Error 3371 (status code: initialization failed) usually happen when essential license files are damaged or missing after a Windows update or a fresh computer setup.</p>
@@ -158,7 +141,7 @@ router.get('/errors/installation-errors', (req, res) => {
 });
 
 // 6. SEO Page 4: Bank Feed & Payroll Sync Errors
-router.get('/errors/bank-feed-payroll-errors', (req, res) => {
+app.get('/errors/bank-feed-payroll-errors', (req, res) => {
   const content = `
     <h2>Troubleshooting QuickBooks® Bank Feed & Payroll Errors (324, PS038)</h2>
     <p>US business owners rely heavily on automated bank feeds and smooth payroll runs. When Bank Feed Error 324 or Payroll Update Error PS038 hits, your financial tracking halts.</p>
@@ -177,8 +160,5 @@ router.get('/errors/bank-feed-payroll-errors', (req, res) => {
   `;
   res.send(layout("Fix QuickBooks Bank Feed Error 324 & Payroll PS038", "Expert troubleshooting for QuickBooks bank feed synchronization and payroll update errors for US companies.", content));
 });
-
-app.use('/.netlify/functions/api', router);
-app.use('/api', router);
 
 module.exports.handler = serverless(app);
