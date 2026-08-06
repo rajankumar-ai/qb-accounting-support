@@ -104,7 +104,7 @@ app.get('/errors/company-file-errors', (req, res) => {
     <div class="cta-box">
       <h3>File Still Corrupted or Refusing to Open?</h3>
       <p>Let our private experts safely repair and restore your company file without data loss.</p>
-      <a href="mailto:support@copixelservices.space" class="cta-btn">Request Private File Repair</a>
+      <a href="mailto:support@copixelservice.space" class="cta-btn">Request Private File Repair</a>
     </div>
   `;
   res.send(layout("Fix QuickBooks Company File Errors (6000 Series) | Support", "Step-by-step guide to resolving QuickBooks company file corruption, error 6123, and 6147 for US businesses.", content));

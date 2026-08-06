@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://accounting.copixelservices.space/sitemap.xml
+Sitemap: https://accounting.copixelservice.space/sitemap.xml
