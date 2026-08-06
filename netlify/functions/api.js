@@ -2,6 +2,7 @@ const express = require('express');
 const serverless = require('serverless-http');
 
 const app = express();
+const router = express.Router();
 
 // Helper template wrapper for consistent styling across all pages
 const layout = (title, description, content) => `
@@ -13,8 +14,15 @@ const layout = (title, description, content) => `
     <title>${title}</title>
     <meta name="description" content="${description}">
     <link rel="stylesheet" href="/styles.css">
+    <style>
+        .top-bar { background: #2b6cb0; color: white; text-align: center; padding: 0.6rem; font-size: 0.95rem; font-weight: bold; }
+        .top-bar a { color: white; text-decoration: underline; }
+    </style>
 </head>
 <body>
+    <div class="top-bar">
+        Need Immediate US Support? Call Us Now: <a href="tel:+13203022238">+1 (320) 302-2238</a> (Mon-Fri, 9AM-6PM EST)
+    </div>
     <header>
         <h1>US Private Accounting Support & QuickBooks® Troubleshooting</h1>
         <p>Fast, Independent Remote Assistance for American Small Businesses</p>
@@ -35,46 +43,47 @@ const layout = (title, description, content) => `
     </footer>
 
     <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6a05a2d1827a841c3e8f07ea/1joj081dm';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/6a05a2d1827a841c3e8f07ea/1joj081dm';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
 </body>
 </html>
 `;
 
 // 1. Homepage
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   const content = `
     <h2>Expert Private QuickBooks® Support for US Businesses</h2>
     <p>Are you stuck with broken reconciliations, missing bank feeds, or frustrating software error codes? We provide private, one-on-one remote troubleshooting and bookkeeping clean-up services tailored for US small business owners and accountants.</p>
     
     <h3>Why Choose Our Private Support?</h3>
     <ul>
-      <li><strong>Immediate Response:</strong> Skip long corporate queues and get direct help.</li>
+      <li><strong>Immediate Response:</strong> Skip the long corporate queues and get direct help via phone or live chat.</li>
       <li><strong>US-Tailored Solutions:</strong> Expertise matching American accounting workflows and tax schedules.</li>
-      <li><strong>No Robot Loops:</strong> Talk directly to an expert who resolves your issue fast via secure chat.</li>
+      <li><strong>No Robot Loops:</strong> Talk directly to an expert who resolves your issue fast via secure chat or screen share.</li>
     </ul>
 
     <div class="cta-box">
       <h3>Need an Error Fixed Right Now?</h3>
-      <p>Browse our error code database or reach out for immediate private chat assistance.</p>
-      <a href="/errors" class="cta-btn">View Error Troubleshooting Hub</a>
+      <p>Call us directly or launch live chat for immediate private assistance.</p>
+      <a href="tel:+13203022238" class="cta-btn">Call +1 (320) 302-2238</a>
+      <a href="javascript:void(0);" onclick="Tawk_API.maximize();" class="cta-btn" style="background:#2f855a; margin-left: 10px;">Start Live Chat</a>
     </div>
   `;
   res.send(layout("Independent QuickBooks® Support & US Accounting Help", "Get expert private QuickBooks troubleshooting, clean-up, and error resolution for US small businesses.", content));
 });
 
 // 2. Errors Hub Page
-app.get('/errors', (req, res) => {
+router.get('/errors', (req, res) => {
   const content = `
     <h2>QuickBooks® Error Troubleshooting Hub</h2>
     <p>Select your error category below to find step-by-step resolution guides or request private expert help:</p>
@@ -89,7 +98,7 @@ app.get('/errors', (req, res) => {
 });
 
 // 3. SEO Page 1: Company File Errors
-app.get('/errors/company-file-errors', (req, res) => {
+router.get('/errors/company-file-errors', (req, res) => {
   const content = `
     <h2>Fixing QuickBooks® Company File Errors (6000 Series, 6123, 6147)</h2>
     <p>Company file errors occur when your software is blocked from opening your database file due to permissions, network storage issues, or data damage. US businesses frequently encounter these when launching shared files.</p>
@@ -104,14 +113,14 @@ app.get('/errors/company-file-errors', (req, res) => {
     <div class="cta-box">
       <h3>File Still Corrupted or Refusing to Open?</h3>
       <p>Let our private experts safely repair and restore your company file without data loss.</p>
-      <a href="mailto:support@copixelservice.space" class="cta-btn">Request Private File Repair</a>
+      <a href="tel:+13203022238" class="cta-btn">Call for Immediate File Repair</a>
     </div>
   `;
   res.send(layout("Fix QuickBooks Company File Errors (6000 Series) | Support", "Step-by-step guide to resolving QuickBooks company file corruption, error 6123, and 6147 for US businesses.", content));
 });
 
 // 4. SEO Page 2: Multi-User / Network Errors
-app.get('/errors/multi-user-errors', (req, res) => {
+router.get('/errors/multi-user-errors', (req, res) => {
   const content = `
     <h2>Resolving QuickBooks® Network & Multi-User Errors (H202, H505)</h2>
     <p>When multiple computers on your office network try to access your company file simultaneously, Error H201, H202, or H505 may lock you out because the workstation cannot reach the server database manager.</p>
@@ -126,14 +135,14 @@ app.get('/errors/multi-user-errors', (req, res) => {
     <div class="cta-box">
       <h3>Locked Out of Multi-User Mode?</h3>
       <p>We can remotely configure your network settings and get your team back online instantly.</p>
-      <a href="mailto:support@copixelservices.space" class="cta-btn">Get Remote Network Help</a>
+      <a href="tel:+13203022238" class="cta-btn">Call for Remote Network Help</a>
     </div>
   `;
   res.send(layout("Fix QuickBooks Multi-User Error H202 & H505 | Support", "Learn how to fix QuickBooks network errors and multi-user connectivity problems for US small businesses.", content));
 });
 
 // 5. SEO Page 3: Installation & Licensing Errors
-app.get('/errors/installation-errors', (req, res) => {
+router.get('/errors/installation-errors', (req, res) => {
   const content = `
     <h2>Fixing QuickBooks® Installation & License Errors (3371, 1603, 1904)</h2>
     <p>Installation blocks and Error 3371 (status code: initialization failed) usually happen when essential license files are damaged or missing after a Windows update or a fresh computer setup.</p>
@@ -148,14 +157,14 @@ app.get('/errors/installation-errors', (req, res) => {
     <div class="cta-box">
       <h3>Stuck on Setup or License Activation?</h3>
       <p>Avoid hours of frustration—let our US support specialists handle your installation cleanly.</p>
-      <a href="mailto:support@copixelservices.space" class="cta-btn">Request Setup Support</a>
+      <a href="tel:+13203022238" class="cta-btn">Call for Setup Support</a>
     </div>
   `;
   res.send(layout("Fix QuickBooks Error 3371 & Installation Issues | Support", "Quick guide on how to resolve QuickBooks installation blocks, license errors, and startup failures.", content));
 });
 
 // 6. SEO Page 4: Bank Feed & Payroll Sync Errors
-app.get('/errors/bank-feed-payroll-errors', (req, res) => {
+router.get('/errors/bank-feed-payroll-errors', (req, res) => {
   const content = `
     <h2>Troubleshooting QuickBooks® Bank Feed & Payroll Errors (324, PS038)</h2>
     <p>US business owners rely heavily on automated bank feeds and smooth payroll runs. When Bank Feed Error 324 or Payroll Update Error PS038 hits, your financial tracking halts.</p>
@@ -168,11 +177,16 @@ app.get('/errors/bank-feed-payroll-errors', (req, res) => {
 
     <div class="cta-box">
       <h3>Payroll or Bank Feeds Still Broken?</h3>
-      <p>Get private, secure chat support to clean up your accounts and fix synchronization errors immediately.</p>
-      <a href="mailto:support@copixelservices.space" class="cta-btn">Get Expert Bank & Payroll Help</a>
+      <p>Get private phone or live chat support to clean up your accounts and fix synchronization errors immediately.</p>
+      <a href="tel:+13203022238" class="cta-btn">Call +1 (320) 302-2238</a>
     </div>
   `;
   res.send(layout("Fix QuickBooks Bank Feed Error 324 & Payroll PS038", "Expert troubleshooting for QuickBooks bank feed synchronization and payroll update errors for US companies.", content));
 });
+
+// Mount the router correctly to both root and serverless function paths
+app.use('/', router);
+app.use('/.netlify/functions/api', router);
+app.use('/api', router);
 
 module.exports.handler = serverless(app);
