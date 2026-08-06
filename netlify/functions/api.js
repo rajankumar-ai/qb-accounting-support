@@ -33,6 +33,20 @@ const layout = (title, description, content) => `
     <footer>
         <p><strong>Disclaimer:</strong> This website provides independent accounting and software support services for US clients. We are not affiliated with, endorsed by, or sponsored by Intuit Inc. QuickBooks® is a registered trademark of Intuit Inc.</p>
     </footer>
+
+    <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a05a2d1827a841c3e8f07ea/1joj081dm';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
 </body>
 </html>
 `;
